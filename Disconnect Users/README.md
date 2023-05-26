@@ -1,31 +1,70 @@
-Script de Monitoramento de Usuários Inativos no RDS
-Este script em PowerShell permite monitorar e desconectar usuários inativos do Remote Desktop Services (RDS) com base em um tempo limite definido. Ele utiliza o comando quser para obter a lista de usuários conectados ao RDS e verifica se eles estão inativos por um período de tempo especificado. Se um usuário estiver inativo além do tempo limite, o script realizará o logoff forçado do usuário.
+<h1 align="center">Olá, eu sou Fulano de Tal 👋</h1>
+<p align="center">
+  <img src="https://img.shields.io/github/followers/fulanodetal?style=social">
+  <img src="https://img.shields.io/github/stars/fulanodetal?style=social">
+  <img src="https://img.shields.io/twitter/follow/fulanodetal?style=social">
+</p>
 
-Requisitos
-O script requer o PowerShell para ser executado.
-Certifique-se de que o módulo RemoteDesktop esteja instalado no sistema onde o script será executado.
-Como Usar
-Abra o PowerShell no sistema em que o script será executado.
+## Sobre mim
 
-Copie e cole o código do script em um novo arquivo chamado monitoramento_rdp.ps1.
+Sou um desenvolvedor apaixonado por PowerShell e automação de tarefas. Trabalho como administrador de sistemas em uma empresa de tecnologia e gosto de compartilhar meus conhecimentos e projetos no GitHub.
 
-Edite a variável $inactiveTimeout para definir o tempo limite, em minutos, para considerar um usuário inativo. Por padrão, está configurado para 60 minutos.
+## Meus projetos
 
-Edite o parâmetro -server no comando quser para especificar o nome do servidor RDS em que deseja verificar os usuários conectados. Por exemplo, -server:BRAZUOSKTSP01.
+Aqui estão alguns dos meus projetos que eu criei ou contribuí:
 
-Salve o arquivo monitoramento_rdp.ps1.
+- [GlicoCare](https://github.com/fulanodetal/GlicoCare): Um aplicativo para monitorar os níveis de glicose no sangue.
+- [PowerShellScripts](https://github.com/fulanodetal/PowerShellScripts): Uma coleção de scripts úteis em PowerShell para diversas situações.
+- [Docusaurus](https://github.com/facebook/docusaurus): Um projeto do Facebook para criar, implantar e manter sites de projetos de código aberto.
 
-Execute o script executando o seguinte comando no PowerShell:
+## Minhas habilidades
 
-powershell
-Copy code
-.\monitoramento_rdp.ps1
-O script começará a verificar os usuários conectados ao RDS e desconectará os usuários que estiverem inativos além do tempo limite definido.
+- PowerShell
+- C#
+- HTML
+- CSS
+- JavaScript
+- React
+- SQL Server
+- Azure
 
-Durante a execução, o script exibirá uma mensagem indicando quais usuários foram desconectados devido à inatividade.
+## Meus contatos
 
-Importante
-Certifique-se de que o usuário que executa o script tenha as permissões adequadas para realizar logoff de sessões de usuário no servidor RDS.
-Antes de executar o script em um ambiente de produção, teste-o em um ambiente de teste para garantir que ele funcione conforme esperado e se adapte às suas necessidades.
-Aviso
-O protocolo PPTP (Point-to-Point Tunneling Protocol) usado na autenticação VPN mencionada neste script é considerado inseguro. É recomendável utilizar protocolos VPN mais seguros, como o OpenVPN, IPSec ou outros, que oferecem recursos de segurança mais robustos.
+Você pode me encontrar nas seguintes redes sociais:
+
+- [LinkedIn](https://www.linkedin.com/in/fulanodetal/)
+- [Twitter](https://twitter.com/fulanodetal)
+- [Instagram](https://www.instagram.com/fulanodetal/)
+
+## Meu script
+
+Aqui está o script que eu criei para definir o tempo limite em minutos para considerar um usuário inativo no RDS:
+
+```powershell
+# Define o tempo limite em minutos para considerar um usuário inativo
+$inactiveTimeout = 30
+
+# Obtém a data e hora atuais
+$currentTime = Get-Date
+
+# Obtém a lista de usuários conectados ao RDS
+$users = quser /server:<server_name>
+
+# Loop através de cada linha da saída do comando quser
+foreach ($user in $users) {
+    $userInfo = $user.Trim() -split '\s+'
+    $sessionUser = $userInfo[0]
+    $sessionState = $userInfo[2]
+    $sessionIdleTime = $userInfo[3]
+
+    # Verifica se o estado da sessão é "Active" e o tempo ocioso é maior que o tempo limite definido
+    if ($sessionState -eq "Active" -and $sessionIdleTime -ge $inactiveTimeout) {
+        # Obtém o ID da sessão do usuário
+        $sessionId = $userInfo[1]
+
+        # Faz o logoff do usuário com a opção "force"
+        Invoke-RDUserLogoff -HostServer <server_name> -UnifiedSessionID $sessionId -Force
+
+        Write-Host "Usuário $sessionUser desconectado forçadamente devido à inatividade."
+    }
+}
