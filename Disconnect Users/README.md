@@ -1,40 +1,5 @@
-<h1 align="center">Olá, eu sou Fulano de Tal 👋</h1>
-<p align="center">
-  <img src="https://img.shields.io/github/followers/fulanodetal?style=social">
-  <img src="https://img.shields.io/github/stars/fulanodetal?style=social">
-  <img src="https://img.shields.io/twitter/follow/fulanodetal?style=social">
-</p>
+<h1 align="center">SCRIPT PARA DESCONECTAR USUÁRIOS INATIVOS 👋</h1>
 
-## Sobre mim
-
-Sou um desenvolvedor apaixonado por PowerShell e automação de tarefas. Trabalho como administrador de sistemas em uma empresa de tecnologia e gosto de compartilhar meus conhecimentos e projetos no GitHub.
-
-## Meus projetos
-
-Aqui estão alguns dos meus projetos que eu criei ou contribuí:
-
-- [GlicoCare](https://github.com/fulanodetal/GlicoCare): Um aplicativo para monitorar os níveis de glicose no sangue.
-- [PowerShellScripts](https://github.com/fulanodetal/PowerShellScripts): Uma coleção de scripts úteis em PowerShell para diversas situações.
-- [Docusaurus](https://github.com/facebook/docusaurus): Um projeto do Facebook para criar, implantar e manter sites de projetos de código aberto.
-
-## Minhas habilidades
-
-- PowerShell
-- C#
-- HTML
-- CSS
-- JavaScript
-- React
-- SQL Server
-- Azure
-
-## Meus contatos
-
-Você pode me encontrar nas seguintes redes sociais:
-
-- [LinkedIn](https://www.linkedin.com/in/fulanodetal/)
-- [Twitter](https://twitter.com/fulanodetal)
-- [Instagram](https://www.instagram.com/fulanodetal/)
 
 ## Meu script
 
